@@ -112,7 +112,7 @@ module.exports.deleteBlog = (req, res) => {
         }
 
         // Verify if the authenticated user is the author of the blog or an admin
-        if (blog.author.toString() !== userId.toString() && !userIsAdmin) {
+        if (blog.authorId.toString() !== userId.toString() && !userIsAdmin) {
             console.error('User not authorized to delete this blog');
             return res.status(403).send({ error: 'You are not authorized to delete this blog' });
         }
@@ -191,7 +191,7 @@ module.exports.deleteCommentById = (req, res) => {
         }
 
         // Verify if the authenticated user is the author of the comment
-        if (comment.author.toString() !== userId.toString() && !userIsAdmin) {
+        if (comment.authorId.toString() !== userId.toString() && !userIsAdmin) {
             console.error('User not authorized to delete this comment');
             return res.status(403).send({ error: 'You are not authorized to delete this comment' });
         }
