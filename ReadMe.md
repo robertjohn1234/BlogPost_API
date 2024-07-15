@@ -92,8 +92,9 @@ The target users of this application are general blog readers and authors.
 ### Comment Routes
 
 - **POST /blogs/:id/comments** - Add a comment to a blog post. -ok
-- **GET /blogs/:id/Comments** - Retrieve all comments from a blog. - ongoing
-- **GET /blogs/:id/Comments/:commentId** - Retrieve single comment from a blog. - ongoing
+- **GET /blogs/:id/Comments** - Retrieve all comments from a blog. - ok
+- **GET /blogs/:id/Comments/:commentId** - Retrieve single comment from a blog. - ok
+- **PATCH /blogs/:id/Comments/:commentId** - Update single comment from a blog. - ongoing
 - **DELETE /blogs/:blogId/comments/:commentId** - Delete a specific comment by its ID. -ok
 
 ### Controllers

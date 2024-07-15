@@ -11,6 +11,7 @@ router.delete("/:id", verify, blogController.deleteBlog);
 router.post("/:id/comments", verify, blogController.addBlogComment);
 router.get("/:id/comments", blogController.getAllComments);
 router.get('/:id/comments/:commentId', blogController.getCommentById);
+router.patch('/:id/comments/:commentId', verify, blogController.updateCommentById);
 router.delete("/:id/comments/:commentId", verify, blogController.deleteCommentById);
 
 module.exports = router;

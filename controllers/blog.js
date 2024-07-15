@@ -264,3 +264,43 @@ module.exports.getCommentById = (req, res) => {
         return res.status(500).send({ error: 'Failed to retrieve comment' });
     });
 };
+
+module.exports.updateCommentById = (req, res) => {
+
+    let blogId = req.params.id;
+    let commentId = req.params.commentId;
+    let userId = req.user.id;
+
+    // Find the comment to verify the author
+    Comment.findById(commentId).then(comment => {
+        if (!comment) {
+            console.error('Comment not found');
+            return res.status(404).send({ error: 'Comment not found' });
+        }
+
+        // Verify if the authenticated user is the author of the comment
+        if (comment.authorId.toString() !== userId.toString()) {
+            console.error('User not authorized to update this comment');
+            return res.status(403).send({ error: 'You are not authorized to update this comment' });
+        }
+
+        // Update the comment
+        Comment.findByIdAndUpdate(commentId, { content: req.body.content }, { new: true }).then(updatedComment => {
+            if (!updatedComment) {
+                console.error('Comment not found after update');
+                return res.status(404).send({ error: 'Comment not found' });
+            }
+            return res.status(200).send({
+                message: 'Comment updated successfully',
+                comment: updatedComment
+            });
+        }).catch(err => {
+            console.error('Error in updating the comment: ', err);
+            return res.status(500).send({ error: 'Error in updating the comment' });
+        });
+
+    }).catch(err => {
+        console.error('Error in finding the comment: ', err);
+        return res.status(500).send({ error: 'Error in finding the comment' });
+    });
+};
