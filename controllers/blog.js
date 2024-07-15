@@ -4,6 +4,7 @@ const Comment = require('../models/Comment');
 module.exports.addBlog = (req, res) => {
 
     const authorId = req.user.id;
+    const authorEmail = req.user.email;
 
     return BlogPost.findOne({ title: req.body.title }).then(existingBlog => {
         if (existingBlog) {
@@ -13,7 +14,8 @@ module.exports.addBlog = (req, res) => {
         let newBlog = new BlogPost({
             title: req.body.title,
             content: req.body.content,
-            author: authorId
+            authorId: authorId,
+            authorEmail: authorEmail
         });
 
         return newBlog.save().then(savedBlog => {
