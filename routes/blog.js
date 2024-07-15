@@ -9,7 +9,7 @@ router.get("/:id", verify, blogController.getBlogById);
 router.put("/:id", verify, blogController.updateBlog);
 router.delete("/:id", verify, blogController.deleteBlog);
 router.post("/:id/comments", verify, blogController.addBlogComment);
-router.get("/:id/comments", verify, blogController.getAllComments);
+router.get("/:id/comments", blogController.getAllComments);
 router.get('/:id/comments/:commentId', blogController.getCommentById);
 router.delete("/:id/comments/:commentId", verify, blogController.deleteCommentById);
 
