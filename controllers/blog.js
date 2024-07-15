@@ -139,10 +139,12 @@ module.exports.deleteBlog = (req, res) => {
 module.exports.addBlogComment = (req, res) => {
     let blogId = req.params.id;
     let userId = req.user.id;
+    let userEmail = req.user.email;
 
     let newComment = new Comment({
         content: req.body.content,
-        author: userId,
+        authorId: userId,
+        authorEmail: userEmail,
         post: blogId
     });
 

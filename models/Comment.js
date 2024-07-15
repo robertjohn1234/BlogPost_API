@@ -5,9 +5,13 @@ const CommentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  author: {
+  authorId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
+    required: true
+  },
+  authorEmail: {
+    type: String,
     required: true
   },
   post: {
