@@ -267,7 +267,6 @@ module.exports.getCommentById = (req, res) => {
 
 module.exports.updateCommentById = (req, res) => {
 
-    let blogId = req.params.id;
     let commentId = req.params.commentId;
     let userId = req.user.id;
 
