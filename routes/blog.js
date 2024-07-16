@@ -13,5 +13,5 @@ router.get("/:id/comments", blogController.getAllComments);
 router.get('/:id/comments/:commentId', blogController.getCommentById);
 router.patch('/comments/:commentId', verify, blogController.updateCommentById);
 router.delete("/:id/comments/:commentId", verify, blogController.deleteCommentById);
-
+router.post("/:id/like", verify, blogController.addLike);
 module.exports = router;

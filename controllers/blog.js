@@ -303,3 +303,30 @@ module.exports.updateCommentById = (req, res) => {
         return res.status(500).send({ error: 'Error in finding the comment' });
     });
 };
+
+module.exports.addLike = (req, res) => {
+    const blogId = req.params.id;
+    const userId = req.user.id;
+
+    BlogPost.findById(blogId).then(blog => {
+        if (!blog) {
+            return res.status(404).json({ success: false, error: 'Blog not found' });
+        }
+
+        if (blog.likes.includes(userId)) {
+            return res.status(400).json({ success: false, error: 'User already liked this blog' });
+        }
+
+        blog.likes.push(userId);
+
+        blog.save().then(updatedBlog => {
+            return res.status(200).json({ success: true, likes: updatedBlog.likes.length });
+        }).catch(saveErr => {
+            console.error('Error saving like:', saveErr);
+            return res.status(500).json({ success: false, error: 'Error saving like' });
+        });
+    }).catch(findErr => {
+        console.error('Error finding blog:', findErr);
+        return res.status(500).json({ success: false, error: 'Error finding blog' });
+    });
+};
