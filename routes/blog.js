@@ -5,7 +5,7 @@ const { verify, verifyAdmin } = require("../auth");
 
 router.post("/", verify, blogController.addBlog);
 router.get("/", blogController.getAllBlogs);
-router.get("/:id", verify, blogController.getBlogById);
+router.get("/:id", blogController.getBlogById);
 router.put("/:id", verify, blogController.updateBlog);
 router.delete("/:id", verify, blogController.deleteBlog);
 router.post("/:id/comments", verify, blogController.addBlogComment);
