@@ -69,7 +69,7 @@ module.exports.updateBlog = (req, res) => {
     BlogPost.findById(blogId).then(blog => {
 
 
-        if (blog.author.toString() !== userId.toString()) {
+        if (blog.authorId.toString() !== userId.toString()) {
             return res.status(403).send({ error: 'You are not authorized to update this blog' });
         }
 
